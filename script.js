@@ -235,13 +235,12 @@ const DOM = {
 };
 
 DOM.form.addEventListener("submit", sendMessage);
-/*
 DOM.form.addEventListener("keyup", function (event) {
   if (event.code === "Enter") {
     sendMessage();
   }
 });
-*/
+
 function sendMessage() {
   const value = DOM.input.value;
   if (value === "") {

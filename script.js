@@ -143,10 +143,14 @@ function getRandomName() {
 }
 
 function getName() {
-  let input = prompt("Please input a name between 3 and 12 characters long:");
-  if (input.length > 12 || input.length < 3) {
-    alert("Name not within specified parameters. Assigning random name.");
+  let input = prompt(
+    "Please input a name between 3 and 12 characters long or leave empty for a random name:"
+  );
+  if (input === "") {
     input = getRandomName();
+  } else if ((input.length > 0 && input.length < 3) || input.length > 12) {
+    alert("Name not within specified parameters.");
+    input = getName();
   } else {
     return input;
   }
@@ -193,13 +197,11 @@ drone.on("open", (error) => {
     updateMembers();
   });
 
-  // User joined the room
   room.on("member_join", (member) => {
     members.push(member);
     updateMembers();
   });
 
-  // User left the room
   room.on("member_leave", ({ id }) => {
     const index = members.findIndex((member) => member.id === id);
     members.splice(index, 1);
@@ -233,18 +235,18 @@ const DOM = {
 };
 
 DOM.form.addEventListener("submit", sendMessage);
+/*
 DOM.form.addEventListener("keyup", function (event) {
   if (event.code === "Enter") {
     sendMessage();
   }
 });
-
+*/
 function sendMessage() {
   const value = DOM.input.value;
   if (value === "") {
     return;
   }
-
   DOM.input.value = "";
   drone.publish({
     room: "observable-room",

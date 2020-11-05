@@ -43,15 +43,10 @@ img.emoji {
   height: 2em;
 }
 
-.emoji-wysiwyg-editor:empty:before {
-  content: attr(placeholder);
-  color: #9aa2ab;
-}
-
 .emoji-picker-icon {
   cursor: pointer;
   position: right;
-  margin: 10px 5px 5px 5px;
+  margin: 15px 5px;
   right: 10px;
   top: 5px;
   font-size: 20px;
@@ -88,10 +83,10 @@ img.emoji {
 .emoji-wysiwyg-editor {
   padding: 6px;
   padding-right: 35px;
-  margin-bottom: 0px;
-  min-height: 35px; /* 35 */
-  height: 30px;
-  max-height: 284px;
+  margin: 5px;
+  min-height: 10px; /* 35 */
+  height: 15px;
+  max-height: 15px;
   overflow: auto;
   line-height: 17px;
   border: 1px solid #d2dbe3;

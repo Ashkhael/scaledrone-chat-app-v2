@@ -234,13 +234,14 @@ const DOM = {
   form: document.querySelector(".message-form"),
 };
 
-DOM.form.addEventListener("submit", sendMessage);
-DOM.form.addEventListener("keyup", function (event) {
+/*
+DOM.emojiInput.addEventListener("keyup", function (event) {
   if (event.code === "Enter") {
     sendMessage();
   }
 });
-
+*/
+DOM.form.addEventListener("submit", sendMessage);
 function sendMessage() {
   const value = DOM.input.value;
   if (value === "") {
@@ -252,6 +253,19 @@ function sendMessage() {
     message: value,
   });
 }
+
+$(".form-button").click(function () {
+  $(".emoji-wysiwyg-editor").empty();
+});
+
+/*
+$(".form-input").on("keypress", function (event) {
+  if (event.which == 13) {
+    $(".form-input").on("submit", sendMessage());
+    $(".emoji-wysiwyg-editor").empty();
+  }
+});
+*/
 
 function createMemberElement(member) {
   const { name, color } = member.clientData;

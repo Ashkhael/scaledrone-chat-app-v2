@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script
+      type="text/javascript"
+      src="https://cdn.scaledrone.com/scaledrone.min.js"
+    ></script>
+    <link
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"
+      rel="stylesheet"
+    />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" type="text/css" href="emoji/css/emoji.css" />
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <link rel="icon" href="icon2.png" />
+    <title>ChatApp</title>
+  </head>
+  <body>
+    <div class="left">
+      <div class="label">Your name</div>
+      <div class="me"></div>
+      <div class="label">Connected users</div>
+      <div class="members-count"></div>
+      <div class="members-list"></div>
+    </div>
+    <div class="right">
+      <div class="chat-title">Public room</div>
+      <div class="messages"></div>
+      <form class="message-form" onsubmit="return false;">
+        <input
+          class="form-input form-control textarea-control"
+          rows="1"
+          placeholder="Enter text..."
+          data-emojiable="true"
+        ></input>
+        <input class="form-button" value="Send" type="submit" />
+      </form>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="script.js"></script>
+    <script src="./emoji/js/config.js"></script>
+    <script src="./emoji/js/util.js"></script>
+    <script src="./emoji/js/jquery.emojiarea.js"></script>
+    <script src="./emoji/js/emoji-picker.js"></script>
+  </body>
+</html>

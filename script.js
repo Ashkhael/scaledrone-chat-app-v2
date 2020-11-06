@@ -234,13 +234,20 @@ const DOM = {
   form: document.querySelector(".message-form"),
 };
 
-/*
+/* NOT WORKING, LEFT FOR POSTERITY
 DOM.emojiInput.addEventListener("keyup", function (event) {
   if (event.code === "Enter") {
     sendMessage();
   }
 });
 */
+$(".form-input").on("keypress", function (event) {
+  if (event.which == 13) {
+    $(".form-input").on("submit", sendMessage());
+    $(".emoji-wysiwyg-editor").empty();
+  }
+});
+
 DOM.form.addEventListener("submit", sendMessage);
 function sendMessage() {
   const value = DOM.input.value;
@@ -257,15 +264,6 @@ function sendMessage() {
 $(".form-button").click(function () {
   $(".emoji-wysiwyg-editor").empty();
 });
-
-/*
-$(".form-input").on("keypress", function (event) {
-  if (event.which == 13) {
-    $(".form-input").on("submit", sendMessage());
-    $(".emoji-wysiwyg-editor").empty();
-  }
-});
-*/
 
 function createMemberElement(member) {
   const { name, color } = member.clientData;

@@ -411,8 +411,6 @@
         ev.which = 13;
         ev.keyCode = 13;
         $textarea.trigger(ev);
-        // IT'S NEEDED TO CLEAR CONTENTEDITABLE DIV AFTER SENDING THE MESSAGE
-        //editorDiv.html('');
       }
       if (
         MAX_LENGTH_ALLOWED_KEYS.indexOf(e.which) == -1 &&

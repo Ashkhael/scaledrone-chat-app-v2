@@ -234,21 +234,6 @@ const DOM = {
   form: document.querySelector(".message-form"),
 };
 
-/* NOT WORKING, LEFT FOR POSTERITY
-DOM.emojiInput.addEventListener("keyup", function (event) {
-  if (event.code === "Enter") {
-    sendMessage();
-  }
-});
-*/
-$(".form-input").on("keypress", function (event) {
-  if (event.which == 13) {
-    $(".form-input").on("submit", sendMessage());
-    $(".emoji-wysiwyg-editor").empty();
-  }
-});
-
-DOM.form.addEventListener("submit", sendMessage);
 function sendMessage() {
   const value = DOM.input.value;
   if (value === "") {
@@ -261,9 +246,36 @@ function sendMessage() {
   });
 }
 
+DOM.form.addEventListener("submit", sendMessage);
+/* NOT WORKING, left for posterity
+DOM.form.addEventListener("keyup", function (e) {
+  if (e.code === "Enter") {
+    sendMessage();
+    $(".emoji-wysiwyg-editor").empty();
+  }
+});*/
+
+//clears the contenteditable div after submit via click
 $(".form-button").click(function () {
   $(".emoji-wysiwyg-editor").empty();
 });
+
+/* should register keypress enter and submit. doesn't
+$(".emoji-wysiwyg-editor").on("keypress", function (event) {
+  if (event.which == 13) {
+    $(".form-input").on("submit", sendMessage());
+    $(".emoji-wysiwyg-editor").empty();
+  }
+});
+
+should register keypress enter, then trigger click on form-button. doesn't
+$(".emoji-wysiwyg-editor").on("keypress", function (event) {
+  if (event.which == 13) {
+    $(".form-button").trigger("click", sendMessage());
+    $(".emoji-wysiwyg-editor").empty();
+  }
+});
+*/
 
 function createMemberElement(member) {
   const { name, color } = member.clientData;

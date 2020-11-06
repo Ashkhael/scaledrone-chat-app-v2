@@ -158,17 +158,12 @@ function getName() {
 }
 
 function getRandomColor() {
-  return "#" + Math.floor(Math.random() * 0xffffff).toString(16);
+  var color = "#" + Math.floor(Math.random() * 0xffffff).toString(16);
+  if (color === "#979494") {
+    var color = "#" + Math.floor(Math.random() * 0xffffff).toString(16);
+  }
+  return color;
 }
-
-$(function () {
-  window.emojiPicker = new EmojiPicker({
-    emojiable_selector: "[data-emojiable=true]",
-    assetsPath: "./emoji/img/",
-    popupButtonClasses: "fa fa-smile-o",
-  });
-  window.emojiPicker.discover();
-});
 
 const drone = new ScaleDrone(CHANNEL_ID, {
   data: {
@@ -232,7 +227,11 @@ const DOM = {
   messages: document.querySelector(".messages"),
   input: document.querySelector(".form-input"),
   form: document.querySelector(".message-form"),
+  emojiButton: document.querySelector(".emoji-button"),
+  tooltip: document.querySelector(".tooltip"),
 };
+
+DOM.form.addEventListener("submit", sendMessage);
 
 function sendMessage() {
   const value = DOM.input.value;
@@ -245,37 +244,6 @@ function sendMessage() {
     message: value,
   });
 }
-
-DOM.form.addEventListener("submit", sendMessage);
-/* NOT WORKING, left for posterity
-DOM.form.addEventListener("keyup", function (e) {
-  if (e.code === "Enter") {
-    sendMessage();
-    $(".emoji-wysiwyg-editor").empty();
-  }
-});*/
-
-//clears the contenteditable div after submit via click
-$(".form-button").click(function () {
-  $(".emoji-wysiwyg-editor").empty();
-});
-
-/* should register keypress enter and submit. doesn't
-$(".emoji-wysiwyg-editor").on("keypress", function (event) {
-  if (event.which == 13) {
-    $(".form-input").on("submit", sendMessage());
-    $(".emoji-wysiwyg-editor").empty();
-  }
-});
-
-should register keypress enter, then trigger click on form-button. doesn't
-$(".emoji-wysiwyg-editor").on("keypress", function (event) {
-  if (event.which == 13) {
-    $(".form-button").trigger("click", sendMessage());
-    $(".emoji-wysiwyg-editor").empty();
-  }
-});
-*/
 
 function createMemberElement(member) {
   const { name, color } = member.clientData;
@@ -316,3 +284,14 @@ function addMessageToList(text, member) {
     el.scrollTop = el.scrollHeight - el.clientHeight;
   }
 }
+
+function toggle() {
+  DOM.tooltip.classList.toggle("shown");
+}
+
+document
+  .querySelector("emoji-picker")
+  .addEventListener("emoji-click", (event) => {
+    document.querySelector(".form-input").value += event.detail.emoji.unicode;
+    document.querySelector(".form-input").focus;
+  });
